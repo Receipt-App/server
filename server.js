@@ -20,7 +20,7 @@ app.use(cors());
 
 
 app.get('/users/allusers', function(req, res) {
-    client.query('SELECT * FROM  users;')
+    client.query('SELECT * FROM  allusers;')
     .then(function(data) {
       res.send(data);
     })
@@ -43,9 +43,11 @@ app.get('/users/cards', function(req, res) {
   });
 });
 
+/// post 
+
 app.post('/users/cards', function(req, res) {
   client.query(
-    `INSERT INTO users (username, card)
+    `INSERT INTO cards (username, card)
     VALUES ($1, $2);
     `,
     [
