@@ -73,12 +73,13 @@ app.post('/users/allusers', function(req, res) {
     [
       req.body.name,
       req.body.email,
-      req.body.usernme
-      
+      req.body.usernme      
     ]
   )
     .then(function(data) {
-    res.send('insert complete');
+    res.send(req.body.name,
+      req.body.email,
+      req.body.usernme );
     })
     .catch(function(err) {
     console.error(err);
