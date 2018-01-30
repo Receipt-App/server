@@ -58,7 +58,7 @@ app.post('/users/cards', function(req, res) {
     ]
   )
     .then(function(data) {
-      res.send('insert complete');
+      res.send(console.log('insert complete'));
     })
     .catch(function(err) {
       console.error(err);
