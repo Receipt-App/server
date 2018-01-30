@@ -18,8 +18,8 @@ app.use(cors());
 
 
 
-app.get('/user', function(req, res) {
-    client.query('SELECT * FROM user;')
+app.get('/users', function(req, res) {
+    client.query('SELECT * FROM users;')
     .then(function(data) {
       res.send(data);
     })
@@ -28,16 +28,23 @@ app.get('/user', function(req, res) {
     });
   });
 
-app.post('/user', function(req, res) {
-client.query(
-    `INSERT INTO user (receipt)
-    VALUES ($1);
+app.post('/users', function(req, res) {
+  client.query(
+    // // CREATE TABLE IF NOT EXISTS users(
+    //   id SERIAL PRIMARY KEY,
+    //   name VARCHAR(256),
+    //   email VARCHAR(256),
+    //   username VARCHAR(256)//
+    `INSERT INTO users (name, email, username)
+    VALUES ($1, $2, $3);
     `,
     [
-    req.body.receipt,
-    
+      req.body.name,
+      req.body.email,
+      req.body.usernme,
+      
     ]
-)
+  )
     .then(function(data) {
     res.send('insert complete');
     })
@@ -46,15 +53,29 @@ client.query(
     });
 });
 
-  createTable();
+  usersTable();
+  receiptTable();
 
  
   
-  function createTable() {
+  function receiptTable() {
     client.query(`
-      CREATE TABLE IF NOT EXISTS user(
-        id SERIAL PRIMARY KEY,
+      CREATE TABLE IF NOT EXISTS receipts(
+        id PRIMARY KEY,
+        username VARCHAR(256),
         receipt TEXT NOT NULL
+      );`
+    )
+}
+
+  
+  function usersTable() {
+    client.query(`
+      CREATE TABLE IF NOT EXISTS users(
+        id SERIAL PRIMARY KEY,
+        name VARCHAR(256),
+        email VARCHAR(256),
+        username VARCHAR(256)
       );`
     )
 }
