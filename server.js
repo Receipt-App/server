@@ -18,8 +18,8 @@ app.use(cors());
 
 
 
-app.get('/users', function(req, res) {
-    client.query('SELECT * FROM users;')
+app.get('/users/allusers', function(req, res) {
+    client.query('SELECT * FROM  users;')
     .then(function(data) {
       res.send(data);
     })
@@ -28,13 +28,40 @@ app.get('/users', function(req, res) {
     });
   });
 
+
+///users/receipts or receipts??????????????????????????????????????????????
+
+
+app.get('/users/receipts', function(req, res) {
+  client.query(`SELECT * FROM receipts WHERE username = ${req.body};`)
+  .then(function(data) {
+    res.send(data);
+  })
+  .catch(function(err) {
+    console.error(err);
+  });
+});
+
+app.post('/users/receipts', function(req, res) {
+  client.query(
+    `INSERT INTO users (username, receipt)
+    VALUES ($1, $2);
+    `,
+    [
+      req.body.username,
+      req.body.reseipt,      
+    ]
+  )
+    .then(function(data) {
+      res.send('insert complete');
+    })
+    .catch(function(err) {
+      console.error(err);
+    });
+});
+
 app.post('/users', function(req, res) {
   client.query(
-    // // CREATE TABLE IF NOT EXISTS users(
-    //   id SERIAL PRIMARY KEY,
-    //   name VARCHAR(256),
-    //   email VARCHAR(256),
-    //   username VARCHAR(256)//
     `INSERT INTO users (name, email, username)
     VALUES ($1, $2, $3);
     `,
@@ -71,7 +98,7 @@ app.post('/users', function(req, res) {
   
   function usersTable() {
     client.query(`
-      CREATE TABLE IF NOT EXISTS users(
+      CREATE TABLE IF NOT EXISTS allusers(
         id SERIAL PRIMARY KEY,
         name VARCHAR(256),
         email VARCHAR(256),
