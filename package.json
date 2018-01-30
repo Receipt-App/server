@@ -8,15 +8,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Receipt-App/server.git"
+    "url": "git+https://github.com/card-App/server.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/Receipt-App/server/issues"
+    "url": "https://github.com/card-App/server/issues"
   },
-  "homepage": "https://github.com/Receipt-App/server#readme",
+  "homepage": "https://github.com/card-App/server#readme",
   "dependencies": {
     "body-parser": "^1.18.2",
     "cors": "^2.8.4",

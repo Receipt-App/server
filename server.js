@@ -1,7 +1,7 @@
 'use strict';
 
-const express = require('express');
 const cors = require('cors');
+const express = require('express');
 const pg = require('pg');
 const bodyParser = require('body-parser').urlencoded({extended: true});
 
@@ -13,12 +13,12 @@ const client = new pg.Client(process.env.DATABASE_URL);
 
 client.connect();
 
-
 app.use(cors());
 
 
 
-///users/receipts or receipts??????????????????????????????????????????????
+
+///users/cards or cards??????????????????????????????????????????????
 
 
 
@@ -36,8 +36,8 @@ app.get('/users/allusers', function(req, res) {
 
 
 
-app.get('/users/receipts', function(req, res) {
-  client.query(`SELECT * FROM receipts WHERE username = ${req.body};`)
+app.get('/users/cards', function(req, res) {
+  client.query(`SELECT * FROM cards WHERE username = ${req.body};`)
   .then(function(data) {
     res.send(data);
   })
@@ -46,9 +46,9 @@ app.get('/users/receipts', function(req, res) {
   });
 });
 
-app.post('/users/receipts', function(req, res) {
+app.post('/users/cards', function(req, res) {
   client.query(
-    `INSERT INTO users (username, receipt)
+    `INSERT INTO users (username, card)
     VALUES ($1, $2);
     `,
     [
@@ -64,7 +64,7 @@ app.post('/users/receipts', function(req, res) {
     });
 });
 
-app.post('/users', function(req, res) {
+app.post('/users/allusers', function(req, res) {
   client.query(
     `INSERT INTO users (name, email, username)
     VALUES ($1, $2, $3);
@@ -85,16 +85,16 @@ app.post('/users', function(req, res) {
 });
 
   usersTable();
-  receiptTable();
+  cardTable();
 
  
   
-  function receiptTable() {
+  function cardTable() {
     client.query(`
-      CREATE TABLE IF NOT EXISTS receipts(
+      CREATE TABLE IF NOT EXISTS cards(
         id PRIMARY KEY,
         username VARCHAR(256),
-        receipt TEXT NOT NULL
+        card TEXT NOT NULL
       );`
     )
 }
