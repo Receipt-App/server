@@ -63,7 +63,7 @@ app.post('/users/cards', function(req, res) {
 
 app.post('/users/allusers', function(req, res) {
   client.query(
-    `INSERT INTO users (name, email, username)
+    `INSERT INTO allusers (name, email, username)
     VALUES ($1, $2, $3);
     `,
     [
