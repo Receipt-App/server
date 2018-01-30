@@ -73,7 +73,7 @@ app.post('/users/allusers', function(req, res) {
     [
       req.body.name,
       req.body.email,
-      req.body.usernme,
+      req.body.usernme
       
     ]
   )
@@ -103,9 +103,9 @@ app.post('/users/allusers', function(req, res) {
     client.query(`
       CREATE TABLE IF NOT EXISTS allusers(
         id SERIAL PRIMARY KEY,
-        name VARCHAR(256),
-        email VARCHAR(256),
-        username VARCHAR(256)
+        name TEXT NOT NULL,
+        email TEXT NOT NULL,
+        username TEXT NOT NULL
       );`
     )
 }
