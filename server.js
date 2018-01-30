@@ -65,7 +65,7 @@ app.post('/users/cards', function(req, res) {
     });
 });
 
-app.post('/users/allusers', function(req, res) {
+app.post('/users/allusers', bodyParser, function(req, res) {
   client.query(
     `INSERT INTO allusers (name, email, username)
     VALUES ($1, $2, $3);
@@ -73,13 +73,11 @@ app.post('/users/allusers', function(req, res) {
     [
       req.body.name,
       req.body.email,
-      req.body.usernme      
+      req.body.username      
     ]
   )
     .then(function(data) {
-    res.send(req.body.name,
-      req.body.email,
-      req.body.usernme );
+    res.send('insert complete');
     })
     .catch(function(err) {
     console.error(err);
