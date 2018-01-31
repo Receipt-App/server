@@ -45,6 +45,17 @@ app.get('/users/cards', function(req, res) {
   });
 });
 
+
+app.get('/users/allcars', function(req, res) {
+  client.query(`SELECT * FROM cards;`)
+  .then(function(data) {
+    res.send(data);
+  })
+  .catch(function(err) {
+    console.error(err);
+  });
+});
+
 /// post 
 
 app.post('/users/cards', bodyParser, function(req, res) {
