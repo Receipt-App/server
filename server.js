@@ -54,7 +54,7 @@ app.post('/users/cards', bodyParser, function(req, res) {
     `,
     [
       req.body.username,
-      req.body.reseipt,      
+      req.body.card,      
     ]
   )
     .then(function(data) {
@@ -77,7 +77,7 @@ app.post('/users/allusers', bodyParser, function(req, res) {
     ]
   )
     .then(function(data) {
-    res.send('insert complete');
+    res.send(console.log('insert complete'));
     })
     .catch(function(err) {
     console.error(err);
