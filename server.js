@@ -54,7 +54,7 @@ app.post('/users/cards', bodyParser, function(req, res) {
     `,
     [
       req.body.username,
-      req.body.card,      
+      req.body.card      
     ]
   )
     .then(function(data) {
