@@ -90,6 +90,7 @@ app.post('/users/allusers', bodyParser, function(req, res) {
   function cardTable() {
     client.query(`
       CREATE TABLE IF NOT EXISTS cards(
+        id SERIAL PRIMARY KEY,
         username VARCHAR(256),
         card TEXT NOT NULL
       );`
