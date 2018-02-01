@@ -36,7 +36,7 @@ app.get('/users/allusers', function(req, res) {
 
 
 app.get('/users/cards', function(req, res) {
-  client.query(`SELECT * FROM cards WHERE username = ${req.body};`)
+  client.query(`SELECT * FROM cards WHERE;`)
   .then(function(data) {
     res.send(data);
   })
@@ -90,7 +90,6 @@ app.post('/users/allusers', bodyParser, function(req, res) {
   function cardTable() {
     client.query(`
       CREATE TABLE IF NOT EXISTS cards(
-        id SERIAL PRIMARY KEY,
         username VARCHAR(256),
         card TEXT NOT NULL
       );`
