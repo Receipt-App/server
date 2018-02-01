@@ -67,7 +67,7 @@ function usersTable() {
 
 
 app.get('/users/cards', function(req, res) {
-  client.query(`SELECT * FROM cards;`)
+  client.query('SELECT * FROM  cards;')
   .then(function(data) {
     res.send(data);
   })
