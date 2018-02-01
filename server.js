@@ -81,7 +81,7 @@ app.get('/users/cards', function(req, res) {
 app.post('/users/cards', bodyParser, function(req, res) {
   client.query(
     `INSERT INTO cards (username, name, email, phone, other)
-    VALUES ($1, $2, $3, $4, $5);
+    VALUES ($1, $2, $3, $4, $5) ON CONFLICT DO NOTHING;
     `,
     [
       req.body.username,
