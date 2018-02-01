@@ -49,12 +49,14 @@ app.get('/users/cards', function(req, res) {
 
 app.post('/users/cards', bodyParser, function(req, res) {
   client.query(
-    `INSERT INTO cards (username, card)
-    VALUES ($1, $2);
+    `INSERT INTO cards (username, email, phone, other)
+    VALUES ($1, $2, $3, $4 );
     `,
     [
       req.body.username,
-      req.body.card,   
+      req.body.email,
+      req.body.phonel,
+      req.body.other
     ]
   )
     .then(function(data) {
@@ -92,7 +94,9 @@ app.post('/users/allusers', bodyParser, function(req, res) {
       CREATE TABLE IF NOT EXISTS cards(
         id SERIAL PRIMARY KEY,
         username VARCHAR(256),
-        card TEXT NOT NULL
+        email VARCHAR(256),
+        phone VARCHAR(256),
+        other TEXT NOT NULL
       );`
     )
 }
