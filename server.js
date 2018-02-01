@@ -31,12 +31,43 @@ app.get('/users/allusers', function(req, res) {
     });
   });
 
+app.post('/users/allusers', bodyParser, function(req, res) {
+  client.query(
+    `INSERT INTO allusers (name, email, username)
+    VALUES ($1, $2, $3);
+    `,
+    [
+      req.body.name,
+      req.body.email,
+      req.body.username      
+    ]
+  )
+    .then(function(data) {
+    res.send(console.log('insert complete'));
+    })
+    .catch(function(err) {
+    console.error(err);
+    });
+});
+
+
+function usersTable() {
+  client.query(`
+    CREATE TABLE IF NOT EXISTS allusers(
+      id SERIAL PRIMARY KEY,
+      name TEXT NOT NULL,
+      email TEXT NOT NULL,
+      username TEXT NOT NULL
+    );`
+  )
+}
+
 
 
 
 
 app.get('/users/cards', function(req, res) {
-  client.query(`SELECT * FROM cards ;`)
+  client.query(`SELECT * FROM cards;`)
   .then(function(data) {
     res.send(data);
   })
@@ -67,27 +98,6 @@ app.post('/users/cards', bodyParser, function(req, res) {
       console.error(err);
     });
 });
-
-app.post('/users/allusers', bodyParser, function(req, res) {
-  client.query(
-    `INSERT INTO allusers (name, email, username)
-    VALUES ($1, $2, $3);
-    `,
-    [
-      req.body.name,
-      req.body.email,
-      req.body.username      
-    ]
-  )
-    .then(function(data) {
-    res.send(console.log('insert complete'));
-    })
-    .catch(function(err) {
-    console.error(err);
-    });
-});
-
-
  
   
   function cardTable() {
@@ -95,24 +105,14 @@ app.post('/users/allusers', bodyParser, function(req, res) {
       CREATE TABLE IF NOT EXISTS cards(
         id SERIAL PRIMARY KEY,
         username VARCHAR(256),
+        name VARCHAR(256),
         email VARCHAR(256),
         phone VARCHAR(256),
         other TEXT NOT NULL
       );`
     )
-}
-
-  
-  function usersTable() {
-    client.query(`
-      CREATE TABLE IF NOT EXISTS allusers(
-        id SERIAL PRIMARY KEY,
-        name TEXT NOT NULL,
-        email TEXT NOT NULL,
-        username TEXT NOT NULL
-      );`
-    )
-}
+}  
+ 
 
 app.listen(PORT, () => {
     console.log(PORT);
