@@ -78,7 +78,7 @@ app.get('/users/cards', function(req, res) {
 
 /// post 
 
-app.post('/users/cards', function(req, res) {
+app.post('/users/cards', bodyParser, function(req, res) {
   client.query(
     `INSERT INTO cards (username, name, email, phone, other)
     VALUES ($1, $2, $3, $4, $5);
@@ -88,7 +88,7 @@ app.post('/users/cards', function(req, res) {
       req.body.name,
       req.body.email,
       req.body.phone,
-      req.body.other
+      req.body.other      
     ]
   )
     .then(function(data) {
