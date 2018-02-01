@@ -36,7 +36,7 @@ app.get('/users/allusers', function(req, res) {
 
 
 app.get('/users/cards', function(req, res) {
-  client.query(`SELECT * FROM cards WHERE;`)
+  client.query(`SELECT * FROM cards ;`)
   .then(function(data) {
     res.send(data);
   })
