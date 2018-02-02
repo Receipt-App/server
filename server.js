@@ -77,8 +77,11 @@ app.get('/users/cards', function(req, res) {
 });
 
 app.delete('/users/cards', function(req, res) {
-  client.query(`DELETE * FROM cards WHERE id=$(req.body.but)`)
-    .then(() => res.send('Delete complete'))
+  client.query(`SELECT * FROM cards 
+  WHERE id = $(req.body.but)`)
+  .then(function(data) {
+    res.send(console.log('insert complete'));
+  })
     .catch(console.error);
 });
 
