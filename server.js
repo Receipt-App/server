@@ -76,6 +76,12 @@ app.get('/users/cards', function(req, res) {
   });
 });
 
+app.delete('/users/cards', function(req, res) {
+  client.query(`DELETE * FROM cards WHERE id=$(req.body.but)`)
+    .then(() => res.send('Delete complete'))
+    .catch(console.error);
+});
+
 /// post 
 
 app.post('/users/cards', bodyParser, function(req, res) {
